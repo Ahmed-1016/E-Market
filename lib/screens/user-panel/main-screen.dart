@@ -1,5 +1,6 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names, prefer_const_constructors, no_leading_underscores_for_local_identifiers
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/screens/auth-panel/welcome-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class Mainscreen extends StatelessWidget {
           GestureDetector(
             onTap: ( )async{
               GoogleSignIn googleSignIn = GoogleSignIn();
+              FirebaseAuth _auth = FirebaseAuth.instance;
+              await _auth.signOut();
              await googleSignIn.signOut();
               Get.offAll(()=>WelcomeScreen());
             },
