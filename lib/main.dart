@@ -15,7 +15,7 @@ void main() async {
   await Firebase.initializeApp( //تهيئة firebase
     options: DefaultFirebaseOptions.currentPlatform, //اضافة الخيارات
   );
-  runApp(const MyApp());  //تشغيل التطبيق
+ 
 }
 
 class MyApp extends StatelessWidget {
