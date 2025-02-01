@@ -6,12 +6,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  runApp(const MyApp());
-  WidgetsFlutterBinding.ensureInitialized(); //تأكيد تهيئة الواجهة
-  await Firebase.initializeApp( //تهيئة firebase
-    options: DefaultFirebaseOptions.currentPlatform, //اضافة الخيارات
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
- 
+  
+  runApp(const MyApp());  //تشغيل التطبيق
 }
 
 class MyApp extends StatelessWidget {
