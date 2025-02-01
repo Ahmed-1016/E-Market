@@ -1,17 +1,23 @@
-// ignore_for_file: file_names, prefer_const_constructors, no_leading_underscores_for_local_identifiers
+// ignore_for_file: file_names, no_leading_underscores_for_local_identifiers
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:first/screens/auth-panel/welcome-screen.dart';
-import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Mainscreen extends StatelessWidget {
-  const Mainscreen({super.key});
+import '../../utils/app-constant.dart';
+import '../auth-panel/welcome-screen.dart';
+
+class AdminMainScreen extends StatefulWidget {
+  const AdminMainScreen({super.key});
 
   @override
+  State<AdminMainScreen> createState() => _AdminMainScreenState();
+}
+
+class _AdminMainScreenState extends State<AdminMainScreen> {
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -20,7 +26,7 @@ class Mainscreen extends StatelessWidget {
             statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          AppConstant.appMainName,
+          AppConstant.adminScrenMainName,
           style: TextStyle(
               color: AppConstant.appTextColor,
               fontSize: 25,
@@ -51,3 +57,4 @@ class Mainscreen extends StatelessWidget {
     );
   }
 }
+

@@ -1,21 +1,23 @@
 // ignore_for_file: file_names
 
 class UserModel {
-  final String uId;
-  final String username;
-  final String email;
-  final String phone;
-  final String userImg;
-  final String userDeviceToken;
-  final String country;
-  final String city;
-  final String userAddress;
-  final String street;
-  final bool isAdmin;
-  final bool isActive;
-  final dynamic createdOn;
+  // تعريف كلاس نموذج بيانات المستخدم
+  final String uId; // معرف المستخدم
+  final String username; // اسم المستخدم
+  final String email; // البريد الإلكتروني
+  final String phone; // رقم الهاتف
+  final String userImg; // صورة المستخدم
+  final String userDeviceToken; // رمز جهاز المستخدم
+  final String country; // البلد
+  final String city; // المدينة
+  final String userAddress; // عنوان المستخدم
+  final String street; // الشارع
+  final bool isAdmin; // حالة المستخدم كمسؤول
+  final bool isActive; // حالة نشاط المستخدم
+  final dynamic createdOn; // تاريخ الإنشاء
 
   UserModel({
+    // البناء لإنشاء كائن UserModel
     required this.uId,
     required this.username,
     required this.email,
@@ -32,6 +34,7 @@ class UserModel {
   });
 
   Map<String, dynamic> toMap() {
+    // دالة لتحويل كائن UserModel إلى خريطة
     return {
       'uId': uId,
       'username': username,
@@ -50,6 +53,7 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> json) {
+    // دالة المصنع لتحويل خريطة إلى كائن UserModel
     return UserModel(
       uId: json['uId'],
       username: json['username'],

@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 
 class AppConstant {
-static String appMainName = "المتجر";
+static String adminScrenMainName = "المسؤول";
+static String userScrenMainName = "المستخدم";
 static String appPoweredBy = "Powered By Ahmed Abu-Elela";
 static const appMainColor = Color.fromARGB(255, 184, 38, 24);
 static const appSecondaryColor = Color(0xff981206);
