@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, file_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:first/controllers/banners-controller.dart';

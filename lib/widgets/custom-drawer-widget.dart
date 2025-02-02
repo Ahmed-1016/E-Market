@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, file_names
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/utils/app-constant.dart';
