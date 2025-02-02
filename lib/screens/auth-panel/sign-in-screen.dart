@@ -8,7 +8,6 @@ import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../controllers/get-user-data-controller.dart';
 import '../admin-panel/admin-main-screen.dart';

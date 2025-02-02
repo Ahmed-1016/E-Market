@@ -5,7 +5,6 @@ import 'package:first/screens/auth-panel/sign-in-screen.dart'; // استيراد
 import 'package:first/utils/app-constant.dart'; // استيراد الثوابت من ملف app-constant
 import 'package:flutter/material.dart'; // استيراد مكتبة Flutter لبناء واجهات المستخدم
 import 'package:get/get.dart'; // استيراد مكتبة GetX لإدارة الحالة
-import 'package:lottie/lottie.dart'; // استيراد مكتبة Lottie لعرض الرسوم المتحركة
 
 class WelcomeScreen extends StatelessWidget {
   // تعريف كلاس شاشة الترحيب

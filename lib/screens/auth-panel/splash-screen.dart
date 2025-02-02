@@ -11,7 +11,6 @@ import 'package:first/screens/user-panel/user-main-screen.dart';
 import 'package:first/utils/app-constant.dart'; // استيراد الثوابت من ملف app-constant
 import 'package:flutter/material.dart'; // استيراد مكتبة Flutter لبناء واجهات المستخدم
 import 'package:get/get.dart'; // استيراد مكتبة GetX لإدارة الحالة
-import 'package:lottie/lottie.dart'; // استيراد مكتبة Lottie لعرض الرسوم المتحركة
 
 class SplashScreen extends StatefulWidget {
   // تعريف كلاس شاشة البداية
