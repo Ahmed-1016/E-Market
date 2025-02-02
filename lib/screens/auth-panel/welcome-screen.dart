@@ -34,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             // محاذاة العناصر في العمود إلى الأعلى
             children: [
-              Container(
+              SizedBox(
                 width: 300,
                 height: 300,
                 child: Image.asset('assets/images/tlogo.png'),

@@ -3,6 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/screens/auth-panel/welcome-screen.dart';
 import 'package:first/utils/app-constant.dart';
+import 'package:first/widgets/banners-widget.dart';
+import 'package:first/widgets/custom-drawer-widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ class UserMainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: AppConstant.appSecondaryColor,
             statusBarIconBrightness: Brightness.light),
@@ -27,26 +30,18 @@ class UserMainScreen extends StatelessWidget {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: [
-          GestureDetector(
-            onTap: ( )async{
-              GoogleSignIn googleSignIn = GoogleSignIn();
-              FirebaseAuth _auth = FirebaseAuth.instance;
-              await _auth.signOut();
-             await googleSignIn.signOut();
-              Get.offAll(()=>WelcomeScreen());
-            },
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.logout),
-            ),
-          )
-        ],
+      
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/A.jpg'), fit: BoxFit.cover)),
+      drawer: DrawerWidget(),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Column(children: [
+            SizedBox(height: Get.height/90,),
+            Text("Natural"),
+            BannerWidget()
+          ],),
+        ),
       ),
     );
   }
