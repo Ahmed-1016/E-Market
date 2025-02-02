@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState(); // استدعاء دالة التهيئة الأساسية
     Timer(
-      Duration(seconds: 2), // تعيين مدة المؤقت إلى ثانيتين
+      Duration(seconds: 3), // تعيين مدة المؤقت إلى ثانيتين
       () {
         loggdin(context); // استدعاء دالة تسجيل الدخول
       },
@@ -65,10 +65,10 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Expanded(
               child: Container(
-                width: Get.width, // تعيين عرض الحاوية
+                width: Get.width/2, // تعيين عرض الحاوية
                 alignment: Alignment.center, // محاذاة المحتوى في المنتصف
-                child: Lottie.asset(
-                    'assets/images/splash-sales.json'), // عرض الرسوم المتحركة
+                child: Image.asset(
+                    'assets/images/tlogo.png'), // عرض الرسوم المتحركة
               ),
             ),
             Container(

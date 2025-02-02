@@ -20,7 +20,7 @@ class WelcomeScreen extends StatelessWidget {
           elevation: 0, // تعيين ارتفاع شريط التطبيق
           centerTitle: true, // تعيين عنوان شريط التطبيق في المنتصف
           backgroundColor:
-              AppConstant.appMainColor, // تعيين لون خلفية شريط التطبيق
+              AppConstant.appSecondaryColor, // تعيين لون خلفية شريط التطبيق
           title: const Text(
             "Wecome to my app", // عنوان شريط التطبيق
             style: TextStyle(
@@ -28,13 +28,18 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         body: Container(
+          alignment: Alignment.center,
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.start, // محاذاة العناصر في العمود إلى الأعلى
+            
+            
+            mainAxisAlignment: MainAxisAlignment.start,
+            // محاذاة العناصر في العمود إلى الأعلى
             children: [
               Container(
-                  child: Lottie.asset(
-                      'assets/images/splash-sales.json')), // عرض الرسوم المتحركة
+                width: 300,
+                height: 300,
+                child: Image.asset('assets/images/tlogo.png'),
+              ), // عرض الرسوم المتحركة
               Container(
                 margin: EdgeInsets.only(top: 20.0), // تعيين هامش علوي
                 child: const Text(
@@ -59,8 +64,8 @@ class WelcomeScreen extends StatelessWidget {
                       _googleSignInController
                           .signInWithGoogle(); // تسجيل الدخول بواسطة جوجل
                     },
-                    icon: Image.asset(
-                        'assets/images/google-icon.png'), // أيقونة جوجل
+                    icon:
+                        Image.asset('assets/images/google.png'), // أيقونة جوجل
                     label: Text(
                       "sign in with google", // نص الزر
                       style: TextStyle(
@@ -88,7 +93,8 @@ class WelcomeScreen extends StatelessWidget {
                       Get.to(() =>
                           SigninScreen()); // الانتقال الى صفحة تسجيل الدخول
                     },
-                    icon: Icon(Icons.email), // أيقونة البريد الإلكتروني
+                    icon: Image.asset(
+                        "assets/images/mail.png"), // أيقونة البريد الإلكتروني
                     label: Text(
                       "sign in with e-mail", // نص الزر
                       style: TextStyle(

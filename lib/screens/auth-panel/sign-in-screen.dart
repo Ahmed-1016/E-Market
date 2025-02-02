@@ -47,7 +47,7 @@ class _SigninScreenState extends State<SigninScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: Get.height / 30),
+                
                   iskeyboradvisible
                       ? const Text(
                           "Wecome to my app",
@@ -59,9 +59,10 @@ class _SigninScreenState extends State<SigninScreen> {
                       : Column(
                           children: [
                             SizedBox(
+                              width: 300,
                                 height: 300,
-                                child: Lottie.asset(
-                                    'assets/images/splash-sales.json')),
+                                child: Image.asset(
+                                    'assets/images/tlogo.png')),
                           ],
                         ),
                   SizedBox(height: Get.height / 20),
