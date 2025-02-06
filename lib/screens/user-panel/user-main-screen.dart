@@ -2,7 +2,9 @@
 
 import 'package:first/utils/app-constant.dart';
 import 'package:first/widgets/banners-widget.dart';
+import 'package:first/widgets/category-widget.dart';
 import 'package:first/widgets/custom-drawer-widget.dart';
+import 'package:first/widgets/headind-widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -27,17 +29,32 @@ class UserMainScreen extends StatelessWidget {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-      
       ),
       drawer: DrawerWidget(),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          child: Column(children: [
-            SizedBox(height: Get.height/90,),
-            Text("Natural"),
-            BannerWidget()
-          ],),
+          child: Column(
+            children: [
+              SizedBox(
+                height: Get.height / 50,
+              ),
+              BannerWidget(),
+              HeadingWidget(
+                headingTitle: "Categories",
+                headingSubTitle: "According to your budget",
+                onTap: () {},
+                buttonText: "See More",
+              ),
+              CategoryWidget(),
+              HeadingWidget(
+                headingTitle: "Flah Sale",
+                headingSubTitle: "According to your budget",
+                onTap: () {},
+                buttonText: "See More",
+              ),
+            ],
+          ),
         ),
       ),
     );

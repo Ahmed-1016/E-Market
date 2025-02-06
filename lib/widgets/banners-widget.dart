@@ -19,29 +19,34 @@ class _BannerWidgetState extends State<BannerWidget> {
   final BannersController _bannersController = Get.put(BannersController());
   @override
   Widget build(BuildContext context) {
-    return Container(child: Obx(() {
-      return CarouselSlider(
-          items: _bannersController.bannerUrls
-              .map((imageUrls) => ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: CachedNetworkImage(
-                      imageUrl: imageUrls,
-                      fit: BoxFit.cover,
-                      width: Get.width - 10,
-                      placeholder: (context, url) => ColoredBox(
-                        color: Colors.white,
-                        child: Center(
-                          child: CupertinoActivityIndicator(),
+    return Container(
+      child: Obx(
+        () {
+          return CarouselSlider(
+            items: _bannersController.bannerUrls
+                .map((imageUrls) => ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrls,
+                        fit: BoxFit.cover,
+                        width: Get.width - 10,
+                        placeholder: (context, url) => ColoredBox(
+                          color: Colors.white,
+                          child: Center(
+                            child: CupertinoActivityIndicator(),
+                          ),
                         ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ))
-              .toList(),
-          options: CarouselOptions(
-              scrollDirection: Axis.horizontal,
-              aspectRatio: 2.5,
-              viewportFraction: 1));
-    }));
+                    ))
+                .toList(),
+            options: CarouselOptions(
+                scrollDirection: Axis.horizontal,
+                aspectRatio: 2.5,
+                viewportFraction: 1),
+          );
+        },
+      ),
+    );
   }
 }
