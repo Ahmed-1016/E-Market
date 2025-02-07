@@ -2,7 +2,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:first/models/categories-model.dart';
 import 'package:first/models/product-model.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
