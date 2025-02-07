@@ -66,6 +66,8 @@ class CategoryWidget extends StatelessWidget {
                             title: Center(
                               child: Text(
                                 categoriesModel.categoryName,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),

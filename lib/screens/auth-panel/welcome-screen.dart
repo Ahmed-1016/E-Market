@@ -29,8 +29,6 @@ class WelcomeScreen extends StatelessWidget {
         body: Container(
           alignment: Alignment.center,
           child: Column(
-            
-            
             mainAxisAlignment: MainAxisAlignment.start,
             // محاذاة العناصر في العمود إلى الأعلى
             children: [
@@ -71,7 +69,6 @@ class WelcomeScreen extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: AppConstant.appTextColor), // تنسيق النص
-                      textAlign: TextAlign.center, // محاذاة النص في المنتصف
                     ),
                   ),
                 ),

@@ -78,8 +78,8 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                 return Row(
                   children: [
                     GestureDetector(
-                      
-                      onTap: ()=> Get.to(SingleCategoryProductScreen(categoryId:categoriesModel.categoryId)),
+                      onTap: () => Get.to(SingleCategoryProductScreen(
+                          categoryId: categoriesModel.categoryId)),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(
@@ -93,6 +93,8 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                             title: Center(
                               child: Text(
                                 categoriesModel.categoryName,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
@@ -106,15 +108,6 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                 );
               },
             );
-
-            // Container(
-            //   height: Get.height / 5,
-            //   child: ListView.builder(
-            //     itemCount: snapshot.data!.docs.length,
-            //     shrinkWrap: true,
-            //     scrollDirection: Axis.horizontal,
-            //   ),
-            // );
           }
           return Container();
         },

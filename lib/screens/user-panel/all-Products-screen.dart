@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/product-model.dart';
@@ -11,17 +9,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
-class SingleCategoryProductScreen extends StatefulWidget {
-  String categoryId;
-  SingleCategoryProductScreen({super.key, required this.categoryId});
+class AllProductsScreen extends StatefulWidget {
+  const AllProductsScreen({super.key});
 
   @override
-  State<SingleCategoryProductScreen> createState() =>
-      _SingleCategoryProductScreenState();
+  State<AllProductsScreen> createState() => _AllProductsScreenState();
 }
 
-class _SingleCategoryProductScreenState
-    extends State<SingleCategoryProductScreen> {
+class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +27,7 @@ class _SingleCategoryProductScreenState
             statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "Products",
+          "All Products",
           style: TextStyle(
               color: AppConstant.appTextColor,
               fontSize: 25,
@@ -43,7 +38,7 @@ class _SingleCategoryProductScreenState
       body: FutureBuilder(
         future: FirebaseFirestore.instance
             .collection("products")
-            .where('categoryId', isEqualTo: widget.categoryId)
+            .where('isSale', isEqualTo: false)
             .get(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -61,7 +56,7 @@ class _SingleCategoryProductScreenState
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Category found"),
+              child: Text("No Products found"),
             );
           }
           if (snapshot.data != null) {
@@ -76,7 +71,7 @@ class _SingleCategoryProductScreenState
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, i) {
-                  ProductModel productModel = ProductModel(
+                ProductModel productModel = ProductModel(
                   productId: snapshot.data!.docs[i]['productId'],
                   categoryId: snapshot.data!.docs[i]['categoryId'],
                   productName: snapshot.data!.docs[i]['productName'],
@@ -91,11 +86,11 @@ class _SingleCategoryProductScreenState
                   createdAt: snapshot.data!.docs[i]['createdAt'],
                   updatedAt: snapshot.data!.docs[i]['updatedAt'],
                 );
-                return GestureDetector(
-                   onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel: productModel)),
-                  child: Row(
-                    children: [
-                      Padding(
+                return Row(
+                  children: [
+                    GestureDetector(
+                      onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel: productModel)),
+                      child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(
                           child: FillImageCard(
@@ -108,16 +103,25 @@ class _SingleCategoryProductScreenState
                             title: Center(
                               child: Text(
                                 productModel.productName,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            footer: Text(''),
+                            footer: Center(
+                              child: Text(
+                                "Price: "+" ${productModel.fullPrice}",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                )
+                              ),
+                            ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 );
               },
             );
