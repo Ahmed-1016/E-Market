@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, no_leading_underscores_for_local_identifiers, avoid_unnecessary_containers
 
+import 'package:first/screens/user-panel/all-categories-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:first/widgets/banners-widget.dart';
 import 'package:first/widgets/category-widget.dart';
@@ -8,6 +9,8 @@ import 'package:first/widgets/headind-widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../widgets/flash-sale-widget.dart';
 
 class UserMainScreen extends StatelessWidget {
   const UserMainScreen({super.key});
@@ -43,7 +46,7 @@ class UserMainScreen extends StatelessWidget {
               HeadingWidget(
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
-                onTap: () {},
+                onTap: () => Get.to((AllCategoriesScreen())),
                 buttonText: "See More",
               ),
               CategoryWidget(),
@@ -53,6 +56,7 @@ class UserMainScreen extends StatelessWidget {
                 onTap: () {},
                 buttonText: "See More",
               ),
+              FlashSaleWidget()
             ],
           ),
         ),

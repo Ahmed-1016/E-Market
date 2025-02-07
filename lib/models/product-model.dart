@@ -7,7 +7,7 @@ class ProductModel {
   final String categoryName;
   final String salePrice;
   final String fullPrice;
-  final List productImages;
+  final String productImages;
   final String deliveryTime;
   final bool isSale;
   final String productDescription;
