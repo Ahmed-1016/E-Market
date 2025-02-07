@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_unnecessary_containers
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/product-model.dart';
@@ -23,15 +25,17 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: AppConstant.appSecondaryColor,
-            statusBarIconBrightness: Brightness.light),
+          statusBarColor: AppConstant.appSecondaryColor,
+          statusBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
           "All Products",
           style: TextStyle(
-              color: AppConstant.appTextColor,
-              fontSize: 25,
-              fontWeight: FontWeight.bold),
+            color: AppConstant.appTextColor,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -89,7 +93,8 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel: productModel)),
+                      onTap: () => Get.to(() =>
+                          ProductDeatilsScreen(productModel: productModel)),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(
@@ -106,16 +111,17 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             footer: Center(
-                              child: Text(
-                                "Price: "+" ${productModel.fullPrice}",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                )
-                              ),
+                              child:
+                                  Text("Price: " " ${productModel.fullPrice}",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      )),
                             ),
                           ),
                         ),

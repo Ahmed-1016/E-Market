@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_unnecessary_containers
+// ignore_for_file: file_names, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -85,7 +85,7 @@ class AllProductsWidget extends StatelessWidget {
                             ),
                             footer: Center(
                                 child: Text(
-                                  "Price: "+" ${productModel.fullPrice}",
+                                  "Price: "" ${productModel.fullPrice}",
                                   style: TextStyle(
                                       fontSize: 15,
                                   )

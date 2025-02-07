@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_unnecessary_containers
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/product-model.dart';

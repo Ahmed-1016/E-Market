@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_unnecessary_containers
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/categories-model.dart';
@@ -23,15 +25,17 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: AppConstant.appSecondaryColor,
-            statusBarIconBrightness: Brightness.light),
+          statusBarColor: AppConstant.appSecondaryColor,
+          statusBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
           "All Categories",
           style: TextStyle(
-              color: AppConstant.appTextColor,
-              fontSize: 25,
-              fontWeight: FontWeight.bold),
+            color: AppConstant.appTextColor,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -78,8 +82,11 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () => Get.to(SingleCategoryProductScreen(
-                          categoryId: categoriesModel.categoryId)),
+                      onTap: () => Get.to(
+                        SingleCategoryProductScreen(
+                          categoryId: categoriesModel.categoryId,
+                        ),
+                      ),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(
@@ -96,7 +103,9 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             footer: Text(''),
