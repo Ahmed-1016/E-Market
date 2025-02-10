@@ -123,7 +123,7 @@ class _CartScreenState extends State<CartScreen> {
                           backgroundColor: AppConstant.appMainColor,
                           backgroundImage:
                               NetworkImage(cartModel.productImages[0]),
-                              radius:40,
+                          radius: 40,
                         ),
                         title: Text(cartModel.productName),
                         subtitle: Row(
@@ -208,8 +208,6 @@ class _CartScreenState extends State<CartScreen> {
               ),
             );
           }
-
-          ;
 
           return Container();
         },
