@@ -7,6 +7,7 @@ import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 
 class CartScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         actions: [
           GestureDetector(
-            onTap: () => Get.to(()=>CartScreen()),
+            onTap: () => Get.to(() => CartScreen()),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.shopping_cart),
@@ -47,12 +48,12 @@ class _CartScreenState extends State<CartScreen> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: FirebaseFirestore.instance
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
             .collection("cart")
             .doc(user!.uid)
             .collection('cartOrders')
-            .get(),
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -97,33 +98,109 @@ class _CartScreenState extends State<CartScreen> {
                     productTotalPrice: snapshot.data!.docs[i]
                         ['productTotalPrice'],
                   );
-                  return Card(
-                    elevation: 10,
-                    color: AppConstant.appTextColor,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: AppConstant.appMainColor,
-                        backgroundImage:
-                            NetworkImage(cartModel.productImages[0]),
-                      ),
-                      title: Text(cartModel.productName),
-                      subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(cartModel.productTotalPrice.toString()),
-                          SizedBox(width: Get.width / 20.0),
-                          CircleAvatar(
-                            radius: 14,
-                            backgroundColor: AppConstant.appMainColor,
-                            child: Text("+"),
-                          ),
-                          SizedBox(width: Get.width / 20.0),
-                          CircleAvatar(
-                            radius: 14,
-                            backgroundColor: AppConstant.appMainColor,
-                            child: Text("+"),
-                          ),
-                        ],
+                  return SwipeActionCell(
+                    key: ObjectKey(cartModel.productId),
+                    trailingActions: [
+                      SwipeAction(
+                        title: "Delete",
+                        forceAlignmentToBoundary: true,
+                        performsFirstActionWithFullSwipe: true,
+                        onTap: (CompletionHandler handler) {
+                          FirebaseFirestore.instance
+                              .collection("cart")
+                              .doc(user!.uid)
+                              .collection('cartOrders')
+                              .doc(cartModel.productId)
+                              .delete();
+                        },
+                      )
+                    ],
+                    child: Card(
+                      elevation: 10,
+                      color: AppConstant.appTextColor,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: AppConstant.appMainColor,
+                          backgroundImage:
+                              NetworkImage(cartModel.productImages[0]),
+                              radius:40,
+                        ),
+                        title: Text(cartModel.productName),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(cartModel.productTotalPrice.toString()),
+                            SizedBox(width: Get.width / 20.0),
+                            GestureDetector(
+                              onTap: () {
+                                if (cartModel.productQuantity > 1) {
+                                  FirebaseFirestore.instance
+                                      .collection("cart")
+                                      .doc(user!.uid)
+                                      .collection('cartOrders')
+                                      .doc(cartModel.productId)
+                                      .update({
+                                    "productQuantity":
+                                        cartModel.productQuantity - 1,
+                                    "productTotalPrice": double.parse(
+                                            cartModel.isSale == true
+                                                ? cartModel.salePrice
+                                                : cartModel.fullPrice) *
+                                        (cartModel.productQuantity - 1),
+                                  });
+                                }
+                              },
+                              child: CircleAvatar(
+                                radius: 20,
+                                backgroundColor: AppConstant.appMainColor,
+                                child: Text(
+                                  "-",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: Get.width / 20),
+                            GestureDetector(
+                              onTap: () {
+                                if (cartModel.productQuantity > 0) {
+                                  FirebaseFirestore.instance
+                                      .collection("cart")
+                                      .doc(user!.uid)
+                                      .collection('cartOrders')
+                                      .doc(cartModel.productId)
+                                      .update({
+                                    "productQuantity":
+                                        cartModel.productQuantity + 1,
+                                    "productTotalPrice":
+                                        // double.parse(cartModel.fullPrice) +
+                                        double.parse(cartModel.isSale == true
+                                                ? cartModel.salePrice
+                                                : cartModel.fullPrice) *
+                                            (cartModel.productQuantity + 1),
+                                  });
+                                }
+                              },
+                              child: CircleAvatar(
+                                radius: 20,
+                                backgroundColor: AppConstant.appMainColor,
+                                child: Text(
+                                  "+",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: Get.width / 50),
+                            Text(
+                              "Q: ${cartModel.productQuantity.toString()}",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -131,6 +208,9 @@ class _CartScreenState extends State<CartScreen> {
               ),
             );
           }
+
+          ;
+
           return Container();
         },
       ),
@@ -141,13 +221,7 @@ class _CartScreenState extends State<CartScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Total",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              Text(
-                "PKR 12,00",
+                "Total Price: ",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Material(
