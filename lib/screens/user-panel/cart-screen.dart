@@ -1,6 +1,10 @@
 // ignore_for_file: file_names, avoid_unnecessary_containers
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first/models/cart-model.dart';
 import 'package:first/utils/app-constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,10 +17,20 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: () => Get.to(()=>CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.shopping_cart),
+            ),
+          )
+        ],
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: AppConstant.appSecondaryColor,
@@ -33,43 +47,92 @@ class _CartScreenState extends State<CartScreen> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: 30,
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          itemBuilder: (context, i) {
-            return Card(
-              elevation: 10,
-              color: AppConstant.appTextColor,
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: AppConstant.appMainColor,
-                  child: Text("N"),
-                ),
-                title: Text("New Dess For men"),
-                subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("2200"),
-                    SizedBox(width: Get.width / 20.0),
-                    CircleAvatar(
-                      radius: 14,
-                      backgroundColor: AppConstant.appMainColor,
-                      child: Text("+"),
-                    ),
-                    SizedBox(width: Get.width / 20.0),
-                    CircleAvatar(
-                      radius: 14,
-                      backgroundColor: AppConstant.appMainColor,
-                      child: Text("+"),
-                    ),
-                  ],
-                ),
+      body: FutureBuilder(
+        future: FirebaseFirestore.instance
+            .collection("cart")
+            .doc(user!.uid)
+            .collection('cartOrders')
+            .get(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("Error"),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return SizedBox(
+              height: Get.height / 5,
+              child: Center(
+                child: CupertinoActivityIndicator(),
               ),
             );
-          },
-        ),
+          }
+          if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+            return Center(
+              child: Text("No Products found"),
+            );
+          }
+          if (snapshot.data != null) {
+            return Container(
+              child: ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, i) {
+                  CartModel cartModel = CartModel(
+                    productId: snapshot.data!.docs[i]['productId'],
+                    categoryId: snapshot.data!.docs[i]['categoryId'],
+                    productName: snapshot.data!.docs[i]['productName'],
+                    categoryName: snapshot.data!.docs[i]['categoryName'],
+                    salePrice: snapshot.data!.docs[i]['salePrice'],
+                    fullPrice: snapshot.data!.docs[i]['fullPrice'],
+                    productImages: snapshot.data!.docs[i]['productImages'],
+                    deliveryTime: snapshot.data!.docs[i]['deliveryTime'],
+                    isSale: snapshot.data!.docs[i]['isSale'],
+                    productDescription: snapshot.data!.docs[i]
+                        ['productDescription'],
+                    createdAt: snapshot.data!.docs[i]['createdAt'],
+                    updatedAt: snapshot.data!.docs[i]['updatedAt'],
+                    productQuantity: snapshot.data!.docs[i]['productQuantity'],
+                    productTotalPrice: snapshot.data!.docs[i]
+                        ['productTotalPrice'],
+                  );
+                  return Card(
+                    elevation: 10,
+                    color: AppConstant.appTextColor,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: AppConstant.appMainColor,
+                        backgroundImage:
+                            NetworkImage(cartModel.productImages[0]),
+                      ),
+                      title: Text(cartModel.productName),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(cartModel.productTotalPrice.toString()),
+                          SizedBox(width: Get.width / 20.0),
+                          CircleAvatar(
+                            radius: 14,
+                            backgroundColor: AppConstant.appMainColor,
+                            child: Text("+"),
+                          ),
+                          SizedBox(width: Get.width / 20.0),
+                          CircleAvatar(
+                            radius: 14,
+                            backgroundColor: AppConstant.appMainColor,
+                            child: Text("+"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+          return Container();
+        },
       ),
       bottomNavigationBar: Container(
         child: Padding(

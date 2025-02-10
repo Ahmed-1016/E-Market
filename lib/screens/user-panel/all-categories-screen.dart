@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/categories-model.dart';
+import 'package:first/screens/user-panel/cart-screen.dart';
 import 'package:first/screens/user-panel/single-category-product-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,15 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: () => Get.to(()=>CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.shopping_cart),
+            ),
+          )
+        ],
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: AppConstant.appSecondaryColor,
