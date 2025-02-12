@@ -1,10 +1,9 @@
-// ignore_for_file: file_names, avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously, avoid_print, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/controllers/cart-price-controller.dart';
 import 'package:first/models/cart-model.dart';
-import 'package:first/screens/user-panel/checkout-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +11,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+import '../../controllers/get-customer-device-token-controller.dart';
+import '../../services/place-order-services.dart';
+
+class CheckOutScreen extends StatefulWidget {
+  const CheckOutScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<CheckOutScreen> createState() => _CheckOutScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _CheckOutScreenState extends State<CheckOutScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final CartPriceController cartPriceController =
       Get.put(CartPriceController());
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +40,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "Cart",
+          "Checkout",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -90,8 +96,8 @@ class _CartScreenState extends State<CartScreen> {
                     createdAt: snapshot.data!.docs[i]['createdAt'],
                     updatedAt: snapshot.data!.docs[i]['updatedAt'],
                     productQuantity: snapshot.data!.docs[i]['productQuantity'],
-                    productTotalPrice: snapshot.data!.docs[i]
-                        ['productTotalPrice'],
+                    productTotalPrice: double.parse(
+                        snapshot.data!.docs[i]['productTotalPrice'].toString()),
                   );
 
                   cartPriceController.fetchProductPrice();
@@ -129,74 +135,6 @@ class _CartScreenState extends State<CartScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(cartModel.productTotalPrice.toString()),
-                            SizedBox(width: Get.width / 20.0),
-                            GestureDetector(
-                              onTap: () {
-                                if (cartModel.productQuantity > 1) {
-                                  FirebaseFirestore.instance
-                                      .collection("cart")
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    "productQuantity":
-                                        cartModel.productQuantity - 1,
-                                    "productTotalPrice": double.parse(
-                                            cartModel.isSale == true
-                                                ? cartModel.salePrice
-                                                : cartModel.fullPrice) *
-                                        (cartModel.productQuantity - 1),
-                                  });
-                                }
-                              },
-                              child: CircleAvatar(
-                                radius: 20,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text(
-                                  "-",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: Get.width / 20),
-                            GestureDetector(
-                              onTap: () {
-                                if (cartModel.productQuantity > 0) {
-                                  FirebaseFirestore.instance
-                                      .collection("cart")
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    "productQuantity":
-                                        cartModel.productQuantity + 1,
-                                    "productTotalPrice": double.parse(
-                                            cartModel.isSale == true
-                                                ? cartModel.salePrice
-                                                : cartModel.fullPrice) *
-                                        (cartModel.productQuantity + 1),
-                                  });
-                                }
-                              },
-                              child: CircleAvatar(
-                                radius: 20,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text(
-                                  "+",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: Get.width / 50),
-                            Text(
-                              "Q: ${cartModel.productQuantity.toString()}",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
                           ],
                         ),
                       ),
@@ -231,9 +169,11 @@ class _CartScreenState extends State<CartScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
-                    onPressed: () => Get.to(() => CheckOutScreen()),
+                    onPressed: () {
+                      showCustomBottomSheet();
+                    },
                     child: Text(
-                      "checkout",
+                      "Confirm Order",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -247,6 +187,116 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void showCustomBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        height: Get.height * .8,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(16.0),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: Container(
+                  height: 55.0,
+                  child: TextFormField(
+                    controller: nameController,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                        labelText: "Name",
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                        hintStyle: TextStyle(
+                          fontSize: 12,
+                        )),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: Container(
+                  height: 55.0,
+                  child: TextFormField(
+                    controller: phoneController,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                        labelText: "Phone",
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                        hintStyle: TextStyle(
+                          fontSize: 12,
+                        )),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: Container(
+                  height: 55.0,
+                  child: TextFormField(
+                    controller: addressController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        labelText: "Address",
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                        hintStyle: TextStyle(
+                          fontSize: 12,
+                        )),
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppConstant.appMainColor,
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                ),
+                onPressed: () async {
+                  if (nameController.text != "" &&
+                      phoneController.text != "" &&
+                      addressController.text != "") {
+                    String name = nameController.text.trim();
+                    String phone = phoneController.text.trim();
+                    String address = addressController.text.trim();
+                    String customertoken = await getCustomerDeviceToken();
+
+                    placeOrder(
+                      context: context,
+                      customerName: name,
+                      customerPhone: phone,
+                      customerAddress: address,
+                      customerDeviceToken: customertoken,
+                    );
+                  } else {
+                    Get.snackbar("Error", "Please fill all deatils",
+                        backgroundColor: AppConstant.appMainColor,
+                        colorText: AppConstant.appTextColor);
+                    print("Please Fill All deatils");
+                  }
+                },
+                child: Text(
+                  "Place Order",
+                  style: TextStyle(color: AppConstant.appTextColor),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      isDismissible: true,
+      enableDrag: true,
+      elevation: 6,
     );
   }
 }
