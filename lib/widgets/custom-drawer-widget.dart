@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, file_names
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first/screens/user-panel/all-orders-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,10 +20,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      
       padding: EdgeInsets.only(top: Get.height / 10),
       child: Drawer(
-        
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(20),
@@ -77,6 +76,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 title: Text("Orders"),
                 leading: Icon(Icons.shopping_bag),
                 trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  Get.back();
+                  Get.to(() => AllOrdersScreen());
+                },
               ),
             ),
             Padding(

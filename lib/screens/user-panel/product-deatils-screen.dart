@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, file_names, avoid_unnecessary_containers, avoid_print
+// ignore_for_file: must_be_immutable, file_names, avoid_unnecessary_containers, avoid_print, deprecated_member_use
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDeatilsScreen extends StatefulWidget {
   ProductModel productModel;
@@ -28,7 +29,7 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
       appBar: AppBar(
         actions: [
           GestureDetector(
-            onTap: () => Get.to(()=>CartScreen()),
+            onTap: () => Get.to(() => CartScreen()),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.shopping_cart),
@@ -152,7 +153,10 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: TextButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  sendMessageOnWhatsApp(
+                                      productModel: widget.productModel);
+                                },
                                 label: Text(
                                   "WhatsApp",
                                   style: TextStyle(
@@ -178,7 +182,11 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                               ),
                               child: TextButton.icon(
                                 onPressed: () async {
-                                  await ProductDeatilsServices.checkProductExistence(uId: user!.uid, productModel: widget.productModel, context: context);
+                                  await ProductDeatilsServices
+                                      .checkProductExistence(
+                                          uId: user!.uid,
+                                          productModel: widget.productModel,
+                                          context: context);
                                 },
                                 label: Text(
                                   "Add To Cart",
@@ -204,4 +212,17 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
     );
   }
 
+  static Future<void> sendMessageOnWhatsApp({
+    required ProductModel productModel,
+  }) async {
+    final number = "+201158551439";
+    final message =
+        "Hello Ahmed \n I want to know about this product \n ${productModel.productName} \n ${productModel.productId}";
+    final url = 'http://wa.me/$number?text=${Uri.encodeComponent(message)}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'could not launch $url';
+    }
+  }
 }

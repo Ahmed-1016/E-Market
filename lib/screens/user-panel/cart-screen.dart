@@ -102,14 +102,13 @@ class _CartScreenState extends State<CartScreen> {
                         title: "Delete",
                         forceAlignmentToBoundary: true,
                         performsFirstActionWithFullSwipe: true,
-                        onTap: (CompletionHandler handler) {
-                          FirebaseFirestore.instance
+                        onTap: (CompletionHandler handler) async {
+                          await FirebaseFirestore.instance
                               .collection("cart")
                               .doc(user!.uid)
                               .collection('cartOrders')
                               .doc(cartModel.productId)
                               .delete();
-
                           cartPriceController.fetchProductPrice();
                         },
                       )
@@ -131,9 +130,9 @@ class _CartScreenState extends State<CartScreen> {
                             Text(cartModel.productTotalPrice.toString()),
                             SizedBox(width: Get.width / 20.0),
                             GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 if (cartModel.productQuantity > 1) {
-                                  FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                       .collection("cart")
                                       .doc(user!.uid)
                                       .collection('cartOrders')
@@ -162,9 +161,9 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             SizedBox(width: Get.width / 20),
                             GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 if (cartModel.productQuantity > 0) {
-                                  FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                       .collection("cart")
                                       .doc(user!.uid)
                                       .collection('cartOrders')
