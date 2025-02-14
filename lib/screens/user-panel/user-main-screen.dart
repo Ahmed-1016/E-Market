@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, no_leading_underscores_for_local_identifiers, avoid_unnecessary_containers, unused_element
 
+import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:first/screens/user-panel/all-Products-screen.dart';
 import 'package:first/screens/user-panel/all-categories-screen.dart';
 import 'package:first/screens/user-panel/all-flash-sale-products-screen.dart';
@@ -17,7 +18,7 @@ import 'package:get/get.dart';
 import '../../widgets/flash-sale-widget.dart';
 
 class UserMainScreen extends StatefulWidget {
-  const UserMainScreen({super.key});
+  const UserMainScreen({super.key, required NotchBottomBarController controller});
 
   @override
   State<UserMainScreen> createState() => _UserMainScreenState();
@@ -64,6 +65,7 @@ class _UserMainScreenState extends State<UserMainScreen> {
           child: Container(
             child: Column(
               children: [
+                Text("Ahmed"),
                 SizedBox(
                   height: Get.height / 50,
                 ),

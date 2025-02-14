@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart'; // استيراد مكتبة Firestore للتعامل مع قاعدة البيانات
 import 'package:firebase_auth/firebase_auth.dart'; // استيراد مكتبة Firebase Authentication للتعامل مع تسجيل الدخول
 import 'package:first/controllers/get-device-token-controller.dart'; // استيراد وحدة التحكم للحصول على رمز الجهاز
+import 'package:first/screens/user-panel/my-home-page-screen.dart';
 import 'package:first/models/user-model.dart'; // استيراد نموذج بيانات المستخدم
-import 'package:first/screens/user-panel/user-main-screen.dart'; // استيراد الشاشة الرئيسية للمستخدم
 import 'package:flutter_easyloading/flutter_easyloading.dart'; // استيراد مكتبة EasyLoading لعرض الرسائل التحميل
 import 'package:get/get.dart'; // استيراد مكتبة GetX لإدارة الحالة
 import 'package:google_sign_in/google_sign_in.dart'; // استيراد مكتبة Google Sign-In لتسجيل الدخول باستخدام Google
@@ -67,7 +67,7 @@ class GoogleSignInController extends GetxController {
               .set(userModel.toMap()); // تخزين بيانات المستخدم في Firestore
           EasyLoading.dismiss(); // إخفاء رسالة التحميل
 
-          Get.offAll(() => const UserMainScreen()); // الانتقال إلى الشاشة الرئيسية
+          Get.offAll(() => const MyHomePage()); // الانتقال إلى الشاشة الرئيسية
         }
       }
     } catch (e) {

@@ -6,8 +6,8 @@ import 'dart:async'; // استيراد مكتبة المؤقتات
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/controllers/get-user-data-controller.dart';
 import 'package:first/screens/admin-panel/admin-main-screen.dart';
+import 'package:first/screens/user-panel/my-home-page-screen.dart';
 import 'package:first/screens/auth-panel/welcome-screen.dart'; // استيراد شاشة الترحيب
-import 'package:first/screens/user-panel/user-main-screen.dart';
 import 'package:first/utils/app-constant.dart'; // استيراد الثوابت من ملف app-constant
 import 'package:flutter/material.dart'; // استيراد مكتبة Flutter لبناء واجهات المستخدم
 import 'package:get/get.dart'; // استيراد مكتبة GetX لإدارة الحالة
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (userData[0]['isAdmin'] == true) {
         Get.offAll(() => AdminMainScreen());  // تحويل المستخدم إلى شاشة المسؤول
       } else {
-        Get.offAll(() => UserMainScreen());       // تحويل المستخدم إلى شاشة المستخدم
+        Get.offAll(() => MyHomePage());       // تحويل المستخدم إلى شاشة المستخدم
       }
     } else {
       Get.offAll(() => WelcomeScreen());  // تحويل المستخدم إلى شاشة الترحيب

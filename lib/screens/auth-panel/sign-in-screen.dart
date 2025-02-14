@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/controllers/sign-in-controller.dart';
+import 'package:first/screens/user-panel/my-home-page-screen.dart';
 import 'package:first/screens/auth-panel/sign-up-screen.dart';
-import 'package:first/screens/user-panel/user-main-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -190,7 +190,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                             AppConstant.appSecondaryColor,
                                         colorText: AppConstant.appTextColor);
                                   } else {
-                                    Get.offAll(() => const UserMainScreen());
+                                    Get.offAll(() =>  MyHomePage());
                                     Get.snackbar(
                                         "Success", "User Login Successfully!",
                                         snackPosition: SnackPosition.BOTTOM,

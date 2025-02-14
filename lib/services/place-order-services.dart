@@ -2,8 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first/screens/user-panel/my-home-page-screen.dart';
 import 'package:first/models/order-model.dart';
-import 'package:first/screens/user-panel/user-main-screen.dart';
 import 'package:first/services/generate-order-id-services.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -96,7 +96,7 @@ void placeOrder({
         duration: Duration(seconds: 5),
       );
       EasyLoading.dismiss();
-      Get.offAll(() => UserMainScreen());
+      Get.offAll(() => MyHomePage());
     } catch (e) {
       print("Error $e");
     }
