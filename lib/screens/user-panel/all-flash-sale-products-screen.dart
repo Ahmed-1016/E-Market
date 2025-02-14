@@ -3,7 +3,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/product-model.dart';
-import 'package:first/screens/user-panel/cart-screen.dart';
 import 'package:first/screens/user-panel/product-deatils-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,22 +25,13 @@ class _AllFlashSaleProductsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          GestureDetector(
-            onTap: () => Get.to(()=>CartScreen()),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.shopping_cart),
-            ),
-          )
-        ],
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: AppConstant.appSecondaryColor,
             statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "All Flash Sale Products",
+          "العروض والتخفيضات",
           style: TextStyle(
               color: AppConstant.appTextColor,
               fontSize: 25,
@@ -101,7 +91,8 @@ class _AllFlashSaleProductsScreenState
                   updatedAt: snapshot.data!.docs[i]['updatedAt'],
                 );
                 return GestureDetector(
-                   onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel: productModel)),
+                  onTap: () => Get.to(
+                      () => ProductDeatilsScreen(productModel: productModel)),
                   child: Row(
                     children: [
                       GestureDetector(
@@ -121,26 +112,27 @@ class _AllFlashSaleProductsScreenState
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                               footer: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Rs ${productModel.salePrice}",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                                SizedBox(width: 2.0),
-                                Text(
-                                  " ${productModel.fullPrice}",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      color: AppConstant.appSecondaryColor,
-                                      decoration: TextDecoration.lineThrough),
-                                ),
-                              ],
-                            ),
+                                children: [
+                                  Text(
+                                    "Rs ${productModel.salePrice}",
+                                    style: TextStyle(fontSize: 10),
+                                  ),
+                                  SizedBox(width: 2.0),
+                                  Text(
+                                    " ${productModel.fullPrice}",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: AppConstant.appSecondaryColor,
+                                        decoration: TextDecoration.lineThrough),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

@@ -34,7 +34,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "Cart",
+          "عربة التسوق",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -211,7 +211,8 @@ class _CartScreenState extends State<CartScreen> {
       ),
       bottomNavigationBar: Container(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(
+              top: 8.0, left: 8.0, right: 8.0, bottom: 100.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -230,7 +231,20 @@ class _CartScreenState extends State<CartScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
-                    onPressed: () => Get.to(() => CheckOutScreen()),
+                    onPressed: ()  {
+                      if (cartPriceController.checkcart >0) {
+                        
+                    
+                        Get.to(() => CheckOutScreen());
+                        }else{
+                          Get.snackbar(
+                                        "انتبه", "لاتوجد منتجات",
+                                        snackPosition: SnackPosition.TOP,
+                                        backgroundColor:
+                                            AppConstant.appSecondaryColor,
+                                        colorText: AppConstant.appTextColor);
+                        }
+                    },
                     child: Text(
                       "checkout",
                       style: TextStyle(

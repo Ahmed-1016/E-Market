@@ -10,26 +10,26 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
-  runApp(const MyApp());  //تشغيل التطبيق
+
+  runApp(MyApp()); //تشغيل التطبيق
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});  //البناء
+  MyApp({super.key}); //البناء
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      locale: Locale("ar"),
       debugShowCheckedModeBanner: false,
       title: 'E-Market',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),  //الشاشة الرئيسية
-      builder: EasyLoading.init(),     //تهيئة الloading
+      home: const SplashScreen(), //الشاشة الرئيسية
+      builder: EasyLoading.init(), //تهيئة الloading
     );
   }
 }
-

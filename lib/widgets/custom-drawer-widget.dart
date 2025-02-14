@@ -9,14 +9,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../screens/auth-panel/welcome-screen.dart';
 
-class DrawerWidget extends StatefulWidget {
-  const DrawerWidget({super.key});
+class CustomDrawerWidget extends StatefulWidget {
+  const CustomDrawerWidget({super.key});
 
   @override
-  State<DrawerWidget> createState() => _DrawerWidgetState();
+  State<CustomDrawerWidget> createState() => _CustomDrawerWidgetState();
 }
 
-class _DrawerWidgetState extends State<DrawerWidget> {
+class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
