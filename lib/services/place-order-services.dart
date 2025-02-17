@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, file_names
+// ignore_for_file: avoid_print, file_names, implementation_imports
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +18,7 @@ void placeOrder({
   required String customerDeviceToken,
 }) async {
   User? user = FirebaseAuth.instance.currentUser;
-  EasyLoading.show(status: "Please");
+  EasyLoading.show(status: "برجاء الانتظار");
   if (user != null) {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -83,14 +83,14 @@ void placeOrder({
               .doc(cartModel.productId.toString())
               .delete()
               .then((value) {
-            print('Delete cart products $cartModel.productId.toString()');
+            print('حذف المنتج من السلة $cartModel.productId.toString()');
           });
         }
       }
-      print("Order Confirmed");
+      print("تم تأكيد الطلب");
       Get.snackbar(
         "Order Confirmed",
-        "Thank you!",
+        "تم تأكيد الطلب",
         backgroundColor: AppConstant.appMainColor,
         colorText: AppConstant.appTextColor,
         duration: Duration(seconds: 5),

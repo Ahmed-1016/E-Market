@@ -30,7 +30,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "الاقسام والتصنيفات",
+          "التصنيفات",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -57,7 +57,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Category found"),
+              child: Text("لم يتم اضافة تصنيفات"),
             );
           }
           if (snapshot.data != null) {

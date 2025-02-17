@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_print
+
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:first/screens/user-panel/all-categories-screen.dart';
 import 'package:first/screens/user-panel/all-flash-sale-products-screen.dart';
@@ -71,7 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
               showShadow: true,
               durationInMilliSeconds: 300,
 
-              itemLabelStyle: const TextStyle(fontSize: 12),
+              itemLabelStyle:
+                  const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
 
               elevation: 1,
               bottomBarItems: const [
@@ -82,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.shopping_cart,
                     color: Colors.blueAccent,
                   ),
-                  itemLabel: 'عربة التسوق',
+                  itemLabel: 'سلة المشتريات',
                 ),
                 BottomBarItem(
                   inActiveItem: Icon(
@@ -104,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.category,
                     color: Colors.yellow,
                   ),
-                  itemLabel: 'الاقسام',
+                  itemLabel: 'التصنيف',
                 ),
                 BottomBarItem(
                   inActiveItem: Icon(

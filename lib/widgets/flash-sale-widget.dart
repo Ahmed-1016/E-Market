@@ -35,7 +35,7 @@ class FlashSaleWidget extends StatelessWidget {
         }
         if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
           return Center(
-            child: Text("No Product found"),
+            child: Text("لا يوجد عروض الان"),
           );
         }
         if (snapshot.data != null) {
@@ -46,7 +46,6 @@ class FlashSaleWidget extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, i) {
-               
                 ProductModel productModel = ProductModel(
                   productId: snapshot.data!.docs[i]['productId'],
                   categoryId: snapshot.data!.docs[i]['categoryId'],
@@ -63,7 +62,8 @@ class FlashSaleWidget extends StatelessWidget {
                   updatedAt: snapshot.data!.docs[i]['updatedAt'],
                 );
                 return GestureDetector(
-                  onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel:productModel)),
+                  onTap: () => Get.to(
+                      () => ProductDeatilsScreen(productModel: productModel)),
                   child: Row(
                     children: [
                       Padding(
@@ -89,7 +89,7 @@ class FlashSaleWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Rs ${productModel.salePrice}",
+                                  "السعر:  ${productModel.salePrice}",
                                   style: TextStyle(fontSize: 10),
                                 ),
                                 SizedBox(width: 2.0),

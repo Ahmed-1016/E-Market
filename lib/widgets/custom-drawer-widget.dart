@@ -36,12 +36,12 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text("Ahmed"),
+                title: Text("اسم المستخدم"),
                 subtitle: Text("Version 1.0.1"),
                 leading: CircleAvatar(
                   radius: 22.0,
                   backgroundColor: AppConstant.appMainColor,
-                  child: Text("R"),
+                  child: Text("A"),
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text("Home"),
+                title: Text("الصفحة الرئيسية"),
                 leading: Icon(Icons.home),
                 trailing: Icon(Icons.arrow_forward),
               ),
@@ -64,7 +64,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text("Products"),
+                title: Text("المنتجات"),
                 leading: Icon(Icons.production_quantity_limits),
                 trailing: Icon(Icons.arrow_forward),
               ),
@@ -73,7 +73,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text("Orders"),
+                title: Text("الطلبات"),
                 leading: Icon(Icons.shopping_bag),
                 trailing: Icon(Icons.arrow_forward),
                 onTap: () {
@@ -86,7 +86,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text("Contact"),
+                title: Text("اتصل بنا"),
                 leading: Icon(Icons.help),
                 trailing: Icon(Icons.arrow_forward),
               ),
@@ -102,7 +102,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                   Get.offAll(() => WelcomeScreen());
                 },
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text("Logout"),
+                title: Text("تسجيل الخروج"),
                 leading: Icon(Icons.logout),
                 trailing: Icon(Icons.arrow_forward),
               ),

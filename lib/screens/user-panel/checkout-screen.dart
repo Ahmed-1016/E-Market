@@ -40,7 +40,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "Checkout",
+          "مراجعة الطلبات",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -62,16 +62,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SizedBox(
-              height: Get.height / 5,
-              child: Center(
-                child: CupertinoActivityIndicator(),
-              ),
-            );
-          }
-          if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Products found"),
+              child: CupertinoActivityIndicator(),
             );
           }
           if (snapshot.data != null) {
@@ -105,7 +97,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     key: ObjectKey(cartModel.productId),
                     trailingActions: [
                       SwipeAction(
-                        title: "Delete",
+                        title: "حذف",
                         forceAlignmentToBoundary: true,
                         performsFirstActionWithFullSwipe: true,
                         onTap: (CompletionHandler handler) {

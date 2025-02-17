@@ -6,12 +6,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/models/product-model.dart';
 import 'package:first/screens/user-panel/cart-screen.dart';
 import 'package:first/services/check-product-in-cart-services.dart';
+import 'package:first/services/send-message-on-whatspp-services.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProductDeatilsScreen extends StatefulWidget {
   ProductModel productModel;
@@ -43,7 +43,7 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "Product Deatils",
+          "تفاصيل المنتج",
           style: TextStyle(
               color: AppConstant.appTextColor,
               fontSize: 25,
@@ -98,7 +98,7 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "productName: ${widget.productModel.productName}",
+                              "اسم المنتج: ${widget.productModel.productName}",
                             ),
                             Icon(Icons.favorite_outline)
                           ],
@@ -114,9 +114,9 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                             widget.productModel.isSale == true &&
                                     widget.productModel.salePrice != ""
                                 ? Text(
-                                    "Price: ${widget.productModel.salePrice}")
+                                    "السعر: ${widget.productModel.salePrice}")
                                 : Text(
-                                    "Price: ${widget.productModel.fullPrice}"),
+                                    "السعر: ${widget.productModel.fullPrice}"),
                           ],
                         ),
                       ),
@@ -124,9 +124,9 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        alignment: Alignment.topLeft,
+                        alignment: Alignment.topRight,
                         child: Text(
-                          "categoryName: ${widget.productModel.categoryName}",
+                          "اسم التصنيف: ${widget.productModel.categoryName}",
                         ),
                       ),
                     ),
@@ -135,7 +135,7 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "productDescription: ${widget.productModel.productDescription}",
+                          "وصف المنتج: ${widget.productModel.productDescription}",
                         ),
                       ),
                     ),
@@ -158,9 +158,9 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                                       productModel: widget.productModel);
                                 },
                                 label: Text(
-                                  "WhatsApp",
+                                  "رسالة واتساب",
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: AppConstant.appTextColor,
                                   ),
@@ -182,16 +182,15 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
                               ),
                               child: TextButton.icon(
                                 onPressed: () async {
-                                  await ProductDeatilsServices
-                                      .checkProductExistence(
-                                          uId: user!.uid,
-                                          productModel: widget.productModel,
-                                          context: context);
+                                  await checkProductExistence(
+                                      uId: user!.uid,
+                                      productModel: widget.productModel,
+                                      context: context);
                                 },
                                 label: Text(
-                                  "Add To Cart",
+                                  "اضافة الى السلة",
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: AppConstant.appTextColor,
                                   ),
@@ -210,19 +209,5 @@ class _ProductDeatilsScreenState extends State<ProductDeatilsScreen> {
         ),
       ),
     );
-  }
-
-  static Future<void> sendMessageOnWhatsApp({
-    required ProductModel productModel,
-  }) async {
-    final number = "+201158551439";
-    final message =
-        "Hello Ahmed \n I want to know about this product \n ${productModel.productName} \n ${productModel.productId}";
-    final url = 'http://wa.me/$number?text=${Uri.encodeComponent(message)}';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'could not launch $url';
-    }
   }
 }

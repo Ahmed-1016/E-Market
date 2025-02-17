@@ -26,7 +26,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
       appBar: AppBar(
         actions: [
           GestureDetector(
-            onTap: () => Get.to(()=>CartScreen()),
+            onTap: () => Get.to(() => CartScreen()),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.shopping_cart),
@@ -40,7 +40,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "All Products",
+          "جميع المنتجات",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -70,7 +70,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Products found"),
+              child: Text("لم يتم اضافة منتجات"),
             );
           }
           if (snapshot.data != null) {
@@ -128,7 +128,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                             ),
                             footer: Center(
                               child:
-                                  Text("Price: " " ${productModel.fullPrice}",
+                                  Text("السعر: " " ${productModel.fullPrice}",
                                       style: TextStyle(
                                         fontSize: 15,
                                       )),

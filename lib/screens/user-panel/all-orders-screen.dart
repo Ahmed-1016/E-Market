@@ -32,7 +32,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "All Orders",
+          "الطلبات",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -63,7 +63,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Products found"),
+              child: Text("لا يوجد طلبات"),
             );
           }
           if (snapshot.data != null) {
@@ -120,11 +120,11 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                           ),
                           oredrModel.status != true
                               ? Text(
-                                  "Pinding...",
+                                  "يتم التحضير",
                                   style: TextStyle(color: Colors.green),
                                 )
                               : Text(
-                                  "Delverd",
+                                  "تم التسليم",
                                   style: TextStyle(color: Colors.red),
                                 )
                         ],

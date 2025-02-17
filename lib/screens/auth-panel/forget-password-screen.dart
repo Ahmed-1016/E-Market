@@ -27,7 +27,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           backgroundColor: AppConstant.appSecondaryColor,
           centerTitle: true,
           title: const Text(
-            "Forget Password",
+            "نسيت كلمة السر؟",
             style: TextStyle(color: AppConstant.appTextColor),
           ),
         ),
@@ -35,7 +35,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           child: Column(
             children: [
               isKeyboardVisible
-                  ? const Text("Welcome to my app")
+                  ? const Text("سوبر ماركت")
                   : Column(
                       children: [
                         Lottie.asset('assets/images/splash-sales.json'),
@@ -54,7 +54,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     cursorColor: AppConstant.appSecondaryColor,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: "Email",
+                      hintText: "البريد الالكترونى",
                       prefixIcon: const Icon(Icons.email),
                       contentPadding:
                           const EdgeInsets.only(top: 2.0, left: 8.0),
@@ -78,7 +78,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                   child: TextButton(
                       child: const Text(
-                        "Send email",
+                        "ارسال البريد الالكترونى",
                         style: TextStyle(color: AppConstant.appTextColor),
                       ),
                       onPressed: () async {
@@ -86,8 +86,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                         if (email.isEmpty) {
                           Get.snackbar(
-                            "Error",
-                            "Please enter all details",
+                            "خطأ",
+                            "برجاء ادخال البريد الالكترونى",
                             snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: AppConstant.appSecondaryColor,
                             colorText: AppConstant.appTextColor,

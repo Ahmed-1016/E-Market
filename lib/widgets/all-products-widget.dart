@@ -34,7 +34,7 @@ class AllProductsWidget extends StatelessWidget {
         }
         if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
           return Center(
-            child: Text("No Product found"),
+            child: Text("لا يوجد منتجات"),
           );
         }
         if (snapshot.data != null) {
@@ -61,7 +61,8 @@ class AllProductsWidget extends StatelessWidget {
                   updatedAt: snapshot.data!.docs[i]['updatedAt'],
                 );
                 return GestureDetector(
-                  onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel:productModel)),
+                  onTap: () => Get.to(
+                      () => ProductDeatilsScreen(productModel: productModel)),
                   child: Row(
                     children: [
                       Padding(
@@ -84,13 +85,11 @@ class AllProductsWidget extends StatelessWidget {
                               ),
                             ),
                             footer: Center(
-                                child: Text(
-                                  "Price: "" ${productModel.fullPrice}",
+                              child: Text("السعر: ${productModel.fullPrice}",
                                   style: TextStyle(
-                                      fontSize: 15,
-                                  )
-                                ),
-                              ),
+                                    fontSize: 15,
+                                  )),
+                            ),
                           ),
                         ),
                       )

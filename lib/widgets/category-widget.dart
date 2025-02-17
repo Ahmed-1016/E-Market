@@ -31,7 +31,7 @@ class CategoryWidget extends StatelessWidget {
         }
         if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
           return Center(
-            child: Text("No Category found"),
+            child: Text("لم يتم اضافة تصنيفات"),
           );
         }
         if (snapshot.data != null) {
@@ -50,7 +50,8 @@ class CategoryWidget extends StatelessWidget {
                   updatedAt: snapshot.data!.docs[i]['updatedAt'],
                 );
                 return GestureDetector(
-                   onTap: ()=> Get.to(SingleCategoryProductScreen(categoryId:categoriesModel.categoryId)),
+                  onTap: () => Get.to(SingleCategoryProductScreen(
+                      categoryId: categoriesModel.categoryId)),
                   child: Row(
                     children: [
                       Padding(

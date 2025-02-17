@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
           backgroundColor:
               AppConstant.appSecondaryColor, // تعيين لون خلفية شريط التطبيق
           title: const Text(
-            "Wecome to my app", // عنوان شريط التطبيق
+            "سوبر ماركت", // عنوان شريط التطبيق
             style: TextStyle(
                 fontSize: 30, color: AppConstant.appTextColor), // تنسيق النص
           ),
@@ -64,7 +64,7 @@ class WelcomeScreen extends StatelessWidget {
                     icon:
                         Image.asset('assets/images/google.png'), // أيقونة جوجل
                     label: Text(
-                      "sign in with google", // نص الزر
+                      "الدخول بحساب Google", // نص الزر
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ class WelcomeScreen extends StatelessWidget {
                     icon: Image.asset(
                         "assets/images/mail.png"), // أيقونة البريد الإلكتروني
                     label: Text(
-                      "sign in with e-mail", // نص الزر
+                      "الدخول بالبريد الالكترونى", // نص الزر
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

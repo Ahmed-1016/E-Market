@@ -11,11 +11,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp()); //تشغيل التطبيق
+  runApp(const MyApp()); //تشغيل التطبيق
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key}); //البناء
+  const MyApp({super.key}); //البناء
 
   // This widget is the root of your application.
   @override
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       locale: Locale("ar"),
       debugShowCheckedModeBanner: false,
-      title: 'E-Market',
+      title: 'سوبر ماركت',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

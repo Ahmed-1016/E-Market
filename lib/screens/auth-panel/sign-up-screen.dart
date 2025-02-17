@@ -38,10 +38,11 @@ class _SignupScreenState extends State<SignupScreen> {
       // بناء واجهة المستخدم بناءً على حالة ظهور لوحة المفاتيح
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor:
               AppConstant.appSecondaryColor, // تعيين لون خلفية شريط التطبيق
           title: const Text(
-            "Sign UP", // عنوان شريط التطبيق
+            "تسجيل حساب جديد", // عنوان شريط التطبيق
             style: TextStyle(
                 color: AppConstant.appTextColor,
                 fontWeight: FontWeight.bold), // تنسيق النص
@@ -58,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   Container(
                     alignment: Alignment.center, // محاذاة المحتوى في المنتصف
                     child: const Text(
-                      "Wecome to my app", // نص الترحيب
+                      "سوبر ماركت", // نص الترحيب
                       style: TextStyle(
                           color: AppConstant.appSecondaryColor, // لون النص
                           fontWeight: FontWeight.bold, // وزن الخط
@@ -80,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         keyboardType:
                             TextInputType.name, // تعيين نوع لوحة المفاتيح
                         decoration: InputDecoration(
-                          hintText: "UserName", // نص التلميح
+                          hintText: "اسم المستخدم", // نص التلميح
                           prefixIcon:
                               const Icon(Icons.person), // أيقونة البداية
                           contentPadding: const EdgeInsets.only(
@@ -93,7 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your UserName';
+                            return 'برجاء ادخال اسم المستخدم';
                           }
                           return null;
                         },
@@ -115,7 +116,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         keyboardType:
                             TextInputType.number, // تعيين نوع لوحة المفاتيح
                         decoration: InputDecoration(
-                          hintText: "Phone Number", // نص التلميح
+                          hintText: "رقم الهاتف", // نص التلميح
                           prefixIcon: const Icon(Icons.phone), // أيقونة البداية
                           contentPadding: const EdgeInsets.only(
                               top: 2.0, left: 8.0), // حشوة المحتوى
@@ -127,10 +128,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your Phone Number';
+                            return 'برجاء ادخال رقم الهاتف';
                           }
                           if (value.length < 11 || value.length > 11) {
-                            return 'Phone Number must be 11 characters long';
+                            return 'برجاء ادخل رقم الهاتف بشكل صحيح';
                           }
                           return null;
                         },
@@ -150,7 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         keyboardType: TextInputType
                             .streetAddress, // تعيين نوع لوحة المفاتيح
                         decoration: InputDecoration(
-                          hintText: "City", // نص التلميح
+                          hintText: "المدينة او القرية", // نص التلميح
                           prefixIcon:
                               const Icon(Icons.location_pin), // أيقونة البداية
                           contentPadding: const EdgeInsets.only(
@@ -161,9 +162,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
 
-                         validator: (value) {
+                        validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your City';
+                            return 'برجاء ادخال اسم المدينة او القرية';
                           }
                           return null;
                         },
@@ -184,7 +185,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         keyboardType: TextInputType
                             .emailAddress, // تعيين نوع لوحة المفاتيح
                         decoration: InputDecoration(
-                          hintText: "Email", // نص التلميح
+                          hintText: "البريد الالكترونى", // نص التلميح
                           prefixIcon: const Icon(Icons.email), // أيقونة البداية
                           contentPadding: const EdgeInsets.only(
                               top: 2.0, left: 8.0), // حشوة المحتوى
@@ -195,10 +196,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your Email';
+                            return 'برجاء ادخال بريدك الالكترونى';
                           }
                           if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                            return 'Please enter a valid Email address';
+                            return 'برجاء ادخال بريد الكترونى صالح';
                           }
                           return null;
                         },
@@ -222,7 +223,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             keyboardType: TextInputType
                                 .visiblePassword, // تعيين نوع لوحة المفاتيح
                             decoration: InputDecoration(
-                              hintText: "Password", // نص التلميح
+                              hintText: "كلمة السر", // نص التلميح
                               prefixIcon:
                                   const Icon(Icons.password), // أيقونة البداية
                               suffixIcon: GestureDetector(
@@ -244,14 +245,14 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
 
                             validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          if (value.length < 8) {
-                            return 'Password must be at least 8 characters long';
-                          }
-                          return null;
-                        },
+                              if (value == null || value.isEmpty) {
+                                return 'برجاء ادخال كلمة السر';
+                              }
+                              if (value.length < 8) {
+                                return 'لايمكن ان تقل كلمة السر عن 8 احرف او ارقام';
+                              }
+                              return null;
+                            },
                           ),
                         )),
                   ),
@@ -268,64 +269,28 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: TextButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                          String name = username.text
-                              .trim(); // الحصول على النص من حقل اسم المستخدم
-                          String email = useremail.text
-                              .trim(); // الحصول على النص من حقل البريد الإلكتروني
-                          String phone = userphone.text
-                              .trim(); // الحصول على النص من حقل رقم الهاتف
-                          String city = usercity.text
-                              .trim(); // الحصول على النص من حقل المدينة
-                          String password = userpassword.text
-                              .trim(); // الحصول على النص من حقل كلمة المرور
-                          String userDeviceToken =
-                              ''; // تعيين قيمة فارغة لرمز جهاز المستخدم
+                            String name = username.text
+                                .trim(); // الحصول على النص من حقل اسم المستخدم
+                            String email = useremail.text
+                                .trim(); // الحصول على النص من حقل البريد الإلكتروني
+                            String phone = userphone.text
+                                .trim(); // الحصول على النص من حقل رقم الهاتف
+                            String city = usercity.text
+                                .trim(); // الحصول على النص من حقل المدينة
+                            String password = userpassword.text
+                                .trim(); // الحصول على النص من حقل كلمة المرور
+                            String userDeviceToken =
+                                ''; // تعيين قيمة فارغة لرمز جهاز المستخدم
 
-                          if (name.isEmpty ||
-                              email.isEmpty ||
-                              phone.isEmpty ||
-                              city.isEmpty ||
-                              password.isEmpty) {
-                            // التحقق من أن جميع الحقول ممتلئة
-                            Get.snackbar(
-                              'Error', // عنوان الرسالة
-                              'Please fill all fields', // نص الرسالة
-                              snackPosition:
-                                  SnackPosition.BOTTOM, // تعيين موضع الرسالة
-                              backgroundColor: AppConstant
-                                  .appSecondaryColor, // تعيين لون خلفية الرسالة
-                              colorText: AppConstant
-                                  .appTextColor, // تعيين لون نص الرسالة
-                            );
-                          } else {
-                            UserCredential? userCredential =
-                                await signUpController.signUPMethod(
-                                    name,
-                                    email,
-                                    phone,
-                                    city,
-                                    password,
-                                    userDeviceToken); // استدعاء دالة التسجيل
-
-                            if (UserCredential != null) {
-                              // التحقق من نجاح عملية التسجيل
-                              Get.snackbar(
-                                'verification email sent', // عنوان الرسالة
-                                'please verify your email', // نص الرسالة
-                                snackPosition:
-                                    SnackPosition.BOTTOM, // تعيين موضع الرسالة
-                                backgroundColor: AppConstant
-                                    .appSecondaryColor, // تعيين لون خلفية الرسالة
-                                colorText: AppConstant
-                                    .appTextColor, // تعيين لون نص الرسالة
-                              );
-                              FirebaseAuth.instance.signOut(); // تسجيل الخروج
-                              Get.offAll(() =>
-                                  const SigninScreen()); // الانتقال إلى شاشة تسجيل الدخول
-                            } else {
+                            if (name.isEmpty ||
+                                email.isEmpty ||
+                                phone.isEmpty ||
+                                city.isEmpty ||
+                                password.isEmpty) {
+                              // التحقق من أن جميع الحقول ممتلئة
                               Get.snackbar(
                                 'Error', // عنوان الرسالة
-                                'Please check the entered data.', // نص الرسالة
+                                'برجاء ادخال جميع البيانات', // نص الرسالة
                                 snackPosition:
                                     SnackPosition.BOTTOM, // تعيين موضع الرسالة
                                 backgroundColor: AppConstant
@@ -333,12 +298,48 @@ class _SignupScreenState extends State<SignupScreen> {
                                 colorText: AppConstant
                                     .appTextColor, // تعيين لون نص الرسالة
                               );
+                            } else {
+                              UserCredential? userCredential =
+                                  await signUpController.signUPMethod(
+                                      name,
+                                      email,
+                                      phone,
+                                      city,
+                                      password,
+                                      userDeviceToken); // استدعاء دالة التسجيل
+
+                              if (UserCredential != null) {
+                                // التحقق من نجاح عملية التسجيل
+                                Get.snackbar(
+                                  'تم ارسال رسالة التفعيل', // عنوان الرسالة
+                                  'برجاء تفعيل بريدك الالكترونى', // نص الرسالة
+                                  snackPosition: SnackPosition
+                                      .BOTTOM, // تعيين موضع الرسالة
+                                  backgroundColor: AppConstant
+                                      .appSecondaryColor, // تعيين لون خلفية الرسالة
+                                  colorText: AppConstant
+                                      .appTextColor, // تعيين لون نص الرسالة
+                                );
+                                FirebaseAuth.instance.signOut(); // تسجيل الخروج
+                                Get.offAll(() =>
+                                    const SigninScreen()); // الانتقال إلى شاشة تسجيل الدخول
+                              } else {
+                                Get.snackbar(
+                                  'خطأ', // عنوان الرسالة
+                                  'برجاء التحقق من البيانات', // نص الرسالة
+                                  snackPosition: SnackPosition
+                                      .BOTTOM, // تعيين موضع الرسالة
+                                  backgroundColor: AppConstant
+                                      .appSecondaryColor, // تعيين لون خلفية الرسالة
+                                  colorText: AppConstant
+                                      .appTextColor, // تعيين لون نص الرسالة
+                                );
+                              }
                             }
-                          }
                           }
                         },
                         child: const Text(
-                          "Sign Up", // نص الزر
+                          "تسجيل حساب جديد", // نص الزر
                           style: TextStyle(
                               fontSize: 20, // حجم النص
                               fontWeight: FontWeight.bold, // وزن الخط
@@ -354,7 +355,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         MainAxisAlignment.center, // محاذاة العناصر في المنتصف
                     children: [
                       const Text(
-                        "Already have an account?  ", // نص السؤال
+                        "لدى حساب بالفعل؟  ", // نص السؤال
                         style: TextStyle(
                             color: AppConstant.appSecondaryColor), // لون النص
                       ),
@@ -362,7 +363,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         onTap: () => Get.offAll(() =>
                             const SigninScreen()), // الانتقال إلى شاشة تسجيل الدخول عند النقر
                         child: const Text(
-                          "Sign In", // نص الرابط
+                          "تسجيل الدخول", // نص الرابط
                           style: TextStyle(
                               color: AppConstant.appSecondaryColor, // لون النص
                               fontWeight: FontWeight.bold, // وزن الخط

@@ -34,7 +34,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "عربة التسوق",
+          "سلة المشتريات",
           style: TextStyle(
             color: AppConstant.appTextColor,
             fontSize: 25,
@@ -65,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Products found"),
+              child: Text("لم يتم اضافة منتجات"),
             );
           }
           if (snapshot.data != null) {
@@ -99,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
                     key: ObjectKey(cartModel.productId),
                     trailingActions: [
                       SwipeAction(
-                        title: "Delete",
+                        title: "حذف",
                         forceAlignmentToBoundary: true,
                         performsFirstActionWithFullSwipe: true,
                         onTap: (CompletionHandler handler) async {
@@ -117,6 +117,7 @@ class _CartScreenState extends State<CartScreen> {
                       elevation: 10,
                       color: AppConstant.appTextColor,
                       child: ListTile(
+                        contentPadding: EdgeInsets.all(1),
                         leading: CircleAvatar(
                           backgroundColor: AppConstant.appMainColor,
                           backgroundImage:
@@ -149,7 +150,7 @@ class _CartScreenState extends State<CartScreen> {
                                 }
                               },
                               child: CircleAvatar(
-                                radius: 20,
+                                radius: 15,
                                 backgroundColor: AppConstant.appMainColor,
                                 child: Text(
                                   "-",
@@ -180,7 +181,7 @@ class _CartScreenState extends State<CartScreen> {
                                 }
                               },
                               child: CircleAvatar(
-                                radius: 20,
+                                radius: 15,
                                 backgroundColor: AppConstant.appMainColor,
                                 child: Text(
                                   "+",
@@ -192,7 +193,7 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             SizedBox(width: Get.width / 50),
                             Text(
-                              "Q: ${cartModel.productQuantity.toString()}",
+                              "الكمية: ${cartModel.productQuantity.toString()}",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -218,7 +219,7 @@ class _CartScreenState extends State<CartScreen> {
             children: [
               Obx(
                 () => Text(
-                  "Total Price: ${cartPriceController.totalPrice.value.toStringAsFixed(1)} EGP ",
+                  "السعر الاجمالى: ${cartPriceController.totalPrice.value.toStringAsFixed(1)} جنيه ",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -231,22 +232,18 @@ class _CartScreenState extends State<CartScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
-                    onPressed: ()  {
-                      if (cartPriceController.checkcart >0) {
-                        
-                    
+                    onPressed: () {
+                      if (cartPriceController.checkcart > 0) {
                         Get.to(() => CheckOutScreen());
-                        }else{
-                          Get.snackbar(
-                                        "انتبه", "لاتوجد منتجات",
-                                        snackPosition: SnackPosition.TOP,
-                                        backgroundColor:
-                                            AppConstant.appSecondaryColor,
-                                        colorText: AppConstant.appTextColor);
-                        }
+                      } else {
+                        Get.snackbar("انتبه", "لاتوجد منتجات",
+                            snackPosition: SnackPosition.TOP,
+                            backgroundColor: AppConstant.appSecondaryColor,
+                            colorText: AppConstant.appTextColor);
+                      }
                     },
                     child: Text(
-                      "checkout",
+                      "مراجعة الطلبات",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

@@ -2,10 +2,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/controllers/sign-in-controller.dart';
+import 'package:first/screens/auth-panel/welcome-screen.dart';
 import 'package:first/screens/user-panel/my-home-page-screen.dart';
 import 'package:first/screens/auth-panel/sign-up-screen.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 
@@ -33,12 +35,17 @@ class _SigninScreenState extends State<SigninScreen> {
     return KeyboardVisibilityBuilder(builder: (context, iskeyboradvisible) {
       return Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: AppConstant.appTextColor),
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: AppConstant.appSecondaryColor,
+              statusBarIconBrightness: Brightness.light),
           backgroundColor: AppConstant.appSecondaryColor,
-          title: const Text(
-            "Sign In",
-            style: TextStyle(
-                color: AppConstant.appTextColor, fontWeight: FontWeight.bold),
-          ),
+          title: Text("تسجيل الدخول",
+              style: TextStyle(
+                  color: AppConstant.appTextColor,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold)),
+          centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -46,10 +53,9 @@ class _SigninScreenState extends State<SigninScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                
                   iskeyboradvisible
                       ? const Text(
-                          "Wecome to my app",
+                          "سوبر ماركت",
                           style: TextStyle(
                               color: AppConstant.appSecondaryColor,
                               fontWeight: FontWeight.bold,
@@ -58,10 +64,9 @@ class _SigninScreenState extends State<SigninScreen> {
                       : Column(
                           children: [
                             SizedBox(
-                              width: 300,
-                                height: 300,
-                                child: Image.asset(
-                                    'assets/images/tlogo.png')),
+                                width: 250,
+                                height: 250,
+                                child: Image.asset('assets/images/tlogo.png')),
                           ],
                         ),
                   SizedBox(height: Get.height / 20),
@@ -75,7 +80,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         cursorColor: AppConstant.appSecondaryColor,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          hintText: "Email",
+                          hintText: "البريد الالكترونى",
                           prefixIcon: const Icon(Icons.email),
                           contentPadding:
                               const EdgeInsets.only(top: 2.0, left: 8.0),
@@ -85,10 +90,10 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your Email';
+                            return 'برجاء ادخال بريدك الالكترونى';
                           }
                           if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                            return 'Please enter a valid Email address';
+                            return 'برجاء ادخال بريد الكترونى صالح';
                           }
                           return null;
                         },
@@ -108,7 +113,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             cursorColor: AppConstant.appSecondaryColor,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
-                              hintText: "Password",
+                              hintText: "كلمة السر",
                               prefixIcon: const Icon(Icons.password),
                               suffixIcon: GestureDetector(
                                 onTap: () {
@@ -127,10 +132,10 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
+                                return 'برجاء ادخال كلمة السر';
                               }
                               if (value.length < 8) {
-                                return 'Password must be at least 8 characters long';
+                                return 'لايمكن ان تقل كلمة السر عن 8 احرف او ارقام';
                               }
                               return null;
                             },
@@ -143,7 +148,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: GestureDetector(
                       onTap: () => Get.to(() => const ForgetPasswordScreen()),
                       child: const Text(
-                        "forget password?",
+                        "نسيت كلمة السر؟",
                         style: TextStyle(
                             color: AppConstant.appSecondaryColor,
                             fontWeight: FontWeight.bold),
@@ -165,8 +170,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             String password = userpassword.text.trim();
 
                             if (email.isEmpty || password.isEmpty) {
-                              Get.snackbar(
-                                  "error", "Please fill all the fields",
+                              Get.snackbar("خطأ", "برجاء ادخل جميع البيانات",
                                   snackPosition: SnackPosition.BOTTOM,
                                   backgroundColor:
                                       AppConstant.appSecondaryColor,
@@ -184,15 +188,15 @@ class _SigninScreenState extends State<SigninScreen> {
                                   if (userData[0]['isAdmin'] == true) {
                                     Get.offAll(() => const AdminMainScreen());
                                     Get.snackbar(
-                                        "Success", "Admin Login Successfully!",
+                                        "تنبيه", "!تم تسجيل الدخول بنجاح",
                                         snackPosition: SnackPosition.BOTTOM,
                                         backgroundColor:
                                             AppConstant.appSecondaryColor,
                                         colorText: AppConstant.appTextColor);
                                   } else {
-                                    Get.offAll(() =>  MyHomePage());
+                                    Get.offAll(() => MyHomePage());
                                     Get.snackbar(
-                                        "Success", "User Login Successfully!",
+                                        "تنبيه", "!تم تسجيل الدخول بنجاح",
                                         snackPosition: SnackPosition.BOTTOM,
                                         backgroundColor:
                                             AppConstant.appSecondaryColor,
@@ -200,8 +204,8 @@ class _SigninScreenState extends State<SigninScreen> {
                                   }
                                 } else {
                                   Get.snackbar(
-                                    "error",
-                                    "Please verify your email",
+                                    "تنبيه",
+                                    "برجاء تفعيل بريدك الالكترونى",
                                     snackPosition: SnackPosition.BOTTOM,
                                     backgroundColor:
                                         AppConstant.appSecondaryColor,
@@ -210,8 +214,8 @@ class _SigninScreenState extends State<SigninScreen> {
                                 }
                               } else {
                                 Get.snackbar(
-                                  "error",
-                                  "Email or password is incorrect",
+                                  "خطأ",
+                                  "خطأ فى البريد الالكترونى او كلمة السر",
                                   snackPosition: SnackPosition.BOTTOM,
                                   backgroundColor:
                                       AppConstant.appSecondaryColor,
@@ -222,7 +226,7 @@ class _SigninScreenState extends State<SigninScreen> {
                           }
                         },
                         child: const Text(
-                          "Sign In",
+                          "تسجيل الدخول",
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -237,13 +241,13 @@ class _SigninScreenState extends State<SigninScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have an account?  ",
+                        "ليس لدى حساب؟ ",
                         style: TextStyle(color: AppConstant.appSecondaryColor),
                       ),
                       GestureDetector(
                         onTap: () => Get.offAll(() => const SignupScreen()),
                         child: const Text(
-                          "Sign Up",
+                          "تسجيل حساب جديد",
                           style: TextStyle(
                               color: AppConstant.appSecondaryColor,
                               fontWeight: FontWeight.bold,
@@ -251,6 +255,27 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(height: Get.height / 30),
+                  Material(
+                    child: Container(
+                      width: Get.width / 1.5,
+                      height: Get.height / 18,
+                      decoration: BoxDecoration(
+                          color: AppConstant.appSecondaryColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: TextButton(
+                        onPressed: () => Get.offAll(() => WelcomeScreen()),
+                        child: const Text(
+                          "سجل الدخول بطريقة اخرى",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: AppConstant.appTextColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

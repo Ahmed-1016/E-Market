@@ -29,7 +29,7 @@ class _SingleCategoryProductScreenState
       appBar: AppBar(
         actions: [
           GestureDetector(
-            onTap: () => Get.to(()=>CartScreen()),
+            onTap: () => Get.to(() => CartScreen()),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.shopping_cart),
@@ -42,7 +42,7 @@ class _SingleCategoryProductScreenState
             statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
         title: Text(
-          "Products",
+          "المنتجات",
           style: TextStyle(
               color: AppConstant.appTextColor,
               fontSize: 25,
@@ -71,7 +71,7 @@ class _SingleCategoryProductScreenState
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No Category found"),
+              child: Text("لم يتم اضافة منتجات"),
             );
           }
           if (snapshot.data != null) {
@@ -86,7 +86,7 @@ class _SingleCategoryProductScreenState
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, i) {
-                  ProductModel productModel = ProductModel(
+                ProductModel productModel = ProductModel(
                   productId: snapshot.data!.docs[i]['productId'],
                   categoryId: snapshot.data!.docs[i]['categoryId'],
                   productName: snapshot.data!.docs[i]['productName'],
@@ -102,7 +102,8 @@ class _SingleCategoryProductScreenState
                   updatedAt: snapshot.data!.docs[i]['updatedAt'],
                 );
                 return GestureDetector(
-                   onTap: ()=>Get.to(()=>ProductDeatilsScreen(productModel: productModel)),
+                  onTap: () => Get.to(
+                      () => ProductDeatilsScreen(productModel: productModel)),
                   child: Row(
                     children: [
                       Padding(
@@ -122,7 +123,12 @@ class _SingleCategoryProductScreenState
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            footer: Text(''),
+                            footer: Center(
+                              child: Text(
+                                "السعر:  ${productModel.salePrice}",
+                                style: TextStyle(fontSize: 10),
+                              ),
+                            ),
                           ),
                         ),
                       )
