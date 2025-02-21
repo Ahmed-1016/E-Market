@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
 class SingleCategoryProductScreen extends StatefulWidget {
-  String categoryId;
-  SingleCategoryProductScreen({super.key, required this.categoryId});
+  final String categoryId;
+  const SingleCategoryProductScreen({super.key, required this.categoryId});
 
   @override
   State<SingleCategoryProductScreen> createState() =>
@@ -124,9 +124,35 @@ class _SingleCategoryProductScreenState
                               ),
                             ),
                             footer: Center(
-                              child: Text(
-                                "السعر:  ${productModel.salePrice}",
-                                style: TextStyle(fontSize: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  productModel.isSale == true &&
+                                          productModel.salePrice != ""
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "السعر:  ${productModel.salePrice}",
+                                              style: TextStyle(fontSize: 10),
+                                            ),
+                                            SizedBox(width: 2.0),
+                                            Text(
+                                              " ${productModel.fullPrice}",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: AppConstant
+                                                      .appSecondaryColor,
+                                                  decoration: TextDecoration
+                                                      .lineThrough),
+                                            ),
+                                          ],
+                                        )
+                                      : Text(
+                                          "السعر: ${productModel.fullPrice}",
+                                        ),
+                                ],
                               ),
                             ),
                           ),

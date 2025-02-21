@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/product-model.dart';
 import 'package:first/screens/user-panel/product-deatils-screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
@@ -14,10 +15,7 @@ class AllProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: FirebaseFirestore.instance
-          .collection("products")
-          .where('isSale', isEqualTo: false)
-          .get(),
+      future: FirebaseFirestore.instance.collection("products").get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Center(
@@ -69,7 +67,7 @@ class AllProductsWidget extends StatelessWidget {
                         padding: EdgeInsets.all(5.0),
                         child: Container(
                           child: FillImageCard(
-                            borderRadius: 20.0,
+                            borderRadius: 20,
                             width: Get.width / 3.5,
                             heightImage: Get.height / 12,
                             imageProvider: CachedNetworkImageProvider(
@@ -85,14 +83,39 @@ class AllProductsWidget extends StatelessWidget {
                               ),
                             ),
                             footer: Center(
-                              child: Text("السعر: ${productModel.fullPrice}",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  )),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  productModel.isSale == true &&
+                                          productModel.salePrice != ""
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "السعر:  ${productModel.salePrice}",
+                                              style: TextStyle(fontSize: 10),
+                                            ),
+                                            SizedBox(width: 2.0),
+                                            Text(
+                                              " ${productModel.fullPrice}",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.red,
+                                                  decoration: TextDecoration
+                                                      .lineThrough),
+                                            ),
+                                          ],
+                                        )
+                                      : Text(
+                                          "السعر: ${productModel.fullPrice}",
+                                        ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );

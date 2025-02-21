@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first/controllers/cart-price-controller.dart';
 import 'package:first/models/order-model.dart';
+import 'package:first/screens/user-panel/add-review-screen%20.dart';
 import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 55),
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -73,7 +75,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, i) {
-                  OredrModel oredrModel = OredrModel(
+                  OrderModel orderModel = OrderModel(
                     productId: snapshot.data!.docs[i]['productId'],
                     categoryId: snapshot.data!.docs[i]['categoryId'],
                     productName: snapshot.data!.docs[i]['productName'],
@@ -102,23 +104,23 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                   cartPriceController.fetchProductPrice();
                   return Card(
                     elevation: 10,
-                    color: AppConstant.appTextColor,
+                    color: Colors.white,
                     child: ListTile(
                       leading: CircleAvatar(
                         backgroundColor: AppConstant.appMainColor,
                         backgroundImage:
-                            NetworkImage(oredrModel.productImages[0]),
+                            NetworkImage(orderModel.productImages[0]),
                         radius: 40,
                       ),
-                      title: Text(oredrModel.productName),
+                      title: Text(orderModel.productName),
                       subtitle: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(oredrModel.productTotalPrice.toString()),
+                          Text(orderModel.productTotalPrice.toString()),
                           SizedBox(
-                            width: 50.0,
+                            width: 40.0,
                           ),
-                          oredrModel.status != true
+                          orderModel.status != true
                               ? Text(
                                   "يتم التحضير",
                                   style: TextStyle(color: Colors.green),
@@ -129,6 +131,12 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                 )
                         ],
                       ),
+                      trailing: orderModel.status == true
+                          ? ElevatedButton(
+                              onPressed: () => Get.to(() =>
+                                  AddReviewScreen(orderModel: orderModel)),
+                              child: Text("Review"))
+                          : SizedBox.shrink(),
                     ),
                   );
                 },

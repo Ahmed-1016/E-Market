@@ -122,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
               onTap: (index) {
-                print('current selected index $index');
                 _pageController.jumpToPage(index);
               },
               kIconSize: 24.0,

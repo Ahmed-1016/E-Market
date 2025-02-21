@@ -30,7 +30,7 @@ void placeOrder({
       for (var doc in documents) {
         Map<String, dynamic>? data = doc.data() as Map<String, dynamic>;
         String orderId = generateOrderId();
-        OredrModel cartModel = OredrModel(
+        OrderModel cartModel = OrderModel(
           productId: data['productId'],
           categoryId: data['categoryId'],
           productName: data['productName'],

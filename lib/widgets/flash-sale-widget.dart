@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first/models/product-model.dart';
 import 'package:first/screens/user-panel/product-deatils-screen.dart';
-import 'package:first/utils/app-constant.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
@@ -97,7 +97,7 @@ class FlashSaleWidget extends StatelessWidget {
                                   " ${productModel.fullPrice}",
                                   style: TextStyle(
                                       fontSize: 10,
-                                      color: AppConstant.appSecondaryColor,
+                                      color: Colors.red,
                                       decoration: TextDecoration.lineThrough),
                                 ),
                               ],

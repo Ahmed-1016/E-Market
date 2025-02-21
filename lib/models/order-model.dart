@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-class OredrModel {
+class OrderModel {
   final String productId;
   final String categoryId;
   final String productName;
@@ -22,7 +22,7 @@ class OredrModel {
   final String customerAddress;
   final String customerDeviceToken;
 
-  OredrModel({
+  OrderModel({
     required this.productId,
     required this.categoryId,
     required this.productName,
@@ -70,8 +70,8 @@ class OredrModel {
     };
   }
 
-  factory OredrModel.fromMap(Map<String, dynamic> json) {
-    return OredrModel(
+  factory OrderModel.fromMap(Map<String, dynamic> json) {
+    return OrderModel(
       productId: json['productId'],
       categoryId: json['categoryId'],
       productName: json['productName'],

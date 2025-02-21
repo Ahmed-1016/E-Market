@@ -22,6 +22,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 55),
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -89,7 +90,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Container(
+                        child: SizedBox(
                           child: FillImageCard(
                             borderRadius: 10.0,
                             width: Get.width / 2.2,
@@ -108,7 +109,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                                 ),
                               ),
                             ),
-                            footer: Text(''),
+                            // footer: Text(''),
                           ),
                         ),
                       ),

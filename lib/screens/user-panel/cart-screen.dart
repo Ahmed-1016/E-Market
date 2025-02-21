@@ -26,6 +26,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 55),
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -115,7 +116,7 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                     child: Card(
                       elevation: 10,
-                      color: AppConstant.appTextColor,
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       child: ListTile(
                         contentPadding: EdgeInsets.all(1),
                         leading: CircleAvatar(
@@ -238,7 +239,8 @@ class _CartScreenState extends State<CartScreen> {
                       } else {
                         Get.snackbar("انتبه", "لاتوجد منتجات",
                             snackPosition: SnackPosition.TOP,
-                            backgroundColor: AppConstant.appSecondaryColor,
+                            backgroundColor:
+                                const Color.fromARGB(0, 234, 14, 14),
                             colorText: AppConstant.appTextColor);
                       }
                     },

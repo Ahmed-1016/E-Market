@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartPriceController extends GetxController {
@@ -33,6 +34,8 @@ class CartPriceController extends GetxController {
       }
     }
     totalPrice.value = sum;
+    debugPrint('totalPrice.value: ${totalPrice.value}');
     checkcart = quantity;
+    debugPrint('checkcart: $checkcart');
   }
 }

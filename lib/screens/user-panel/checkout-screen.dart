@@ -29,9 +29,24 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+
+  @override
+  void dispose() {
+    // حذف الكنترولر الخاص بالسعر
+    Get.delete<CartPriceController>(force: true);
+
+    // تنظيف الـ TextEditingControllers
+    nameController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 55),
       appBar: AppBar(
         iconTheme: IconThemeData(color: AppConstant.appTextColor),
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -114,7 +129,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     ],
                     child: Card(
                       elevation: 10,
-                      color: AppConstant.appTextColor,
+                      color: Colors.white,
                       child: ListTile(
                         leading: CircleAvatar(
                           backgroundColor: AppConstant.appMainColor,
@@ -165,7 +180,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       showCustomBottomSheet();
                     },
                     child: Text(
-                      "Confirm Order",
+                      "تأكيد الطلب",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

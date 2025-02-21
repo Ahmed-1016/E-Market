@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_unnecessary_containers, file_names
 
-import 'package:first/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 
 class HeadingWidget extends StatelessWidget {
@@ -48,20 +47,22 @@ class HeadingWidget extends StatelessWidget {
             GestureDetector(
               onTap: onTap,
               child: Container(
+                alignment: Alignment.center,
+                width: 75,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: AppConstant.appSecondaryColor,
+                      color: Colors.red,
                       width: 1.5,
                     )),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                   buttonText,
+                    buttonText,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: AppConstant.appSecondaryColor,
+                      color: Colors.red,
                     ),
                   ),
                 ),

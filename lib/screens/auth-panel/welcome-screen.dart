@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:first/controllers/google-sign-in-controller.dart'; // استيراد وحدة التحكم لتسجيل الدخول بواسطة جوجل
-import 'package:first/screens/auth-panel/sign-in-screen.dart'; // استيراد شاشة تسجيل الدخول
+// import 'package:first/screens/auth-panel/sign-in-screen.dart'; // استيراد شاشة تسجيل الدخول
 import 'package:first/utils/app-constant.dart'; // استيراد الثوابت من ملف app-constant
 import 'package:flutter/material.dart'; // استيراد مكتبة Flutter لبناء واجهات المستخدم
 import 'package:get/get.dart'; // استيراد مكتبة GetX لإدارة الحالة
@@ -73,35 +73,35 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: Get.height / 50, // إضافة مساحة عمودية
-              ),
-              Material(
-                child: Container(
-                  width: Get.width / 1.2, // تعيين عرض الحاوية
-                  height: Get.height / 12, // تعيين ارتفاع الحاوية
-                  decoration: BoxDecoration(
-                      color: AppConstant.appSecondaryColor, // تعيين لون الخلفية
-                      borderRadius:
-                          BorderRadius.circular(40)), // تعيين نصف قطر الزوايا
-                  child: TextButton.icon(
-                    onPressed: () {
-                      Get.to(() =>
-                          SigninScreen()); // الانتقال الى صفحة تسجيل الدخول
-                    },
-                    icon: Image.asset(
-                        "assets/images/mail.png"), // أيقونة البريد الإلكتروني
-                    label: Text(
-                      "الدخول بالبريد الالكترونى", // نص الزر
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: AppConstant.appTextColor), // تنسيق النص
-                      textAlign: TextAlign.center, // محاذاة النص في المنتصف
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: Get.height / 50, // إضافة مساحة عمودية
+              // ),
+              // Material(
+              //   child: Container(
+              //     width: Get.width / 1.2, // تعيين عرض الحاوية
+              //     height: Get.height / 12, // تعيين ارتفاع الحاوية
+              //     decoration: BoxDecoration(
+              //         color: AppConstant.appSecondaryColor, // تعيين لون الخلفية
+              //         borderRadius:
+              //             BorderRadius.circular(40)), // تعيين نصف قطر الزوايا
+              //     child: TextButton.icon(
+              //       onPressed: () {
+              //         Get.to(() =>
+              //             SigninScreen()); // الانتقال الى صفحة تسجيل الدخول
+              //       },
+              //       icon: Image.asset(
+              //           "assets/images/mail.png"), // أيقونة البريد الإلكتروني
+              //       label: Text(
+              //         "الدخول بالبريد الالكترونى", // نص الزر
+              //         style: TextStyle(
+              //             fontSize: 20,
+              //             fontWeight: FontWeight.bold,
+              //             color: AppConstant.appTextColor), // تنسيق النص
+              //         textAlign: TextAlign.center, // محاذاة النص في المنتصف
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ));
